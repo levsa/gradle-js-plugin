@@ -38,6 +38,9 @@ class ResourceUtil {
         final File file = new File(targetDirectory, resourcePath)
         if (!file.exists()) {
             final InputStream inputStream = Thread.currentThread().contextClassLoader.getResourceAsStream(resourcePath)
+            if (inputStream == null) {
+              throw new IllegalArgumentException("Internal error, resource not found: " + resourcePath)
+            }
             file << inputStream
             inputStream.close()
         }
