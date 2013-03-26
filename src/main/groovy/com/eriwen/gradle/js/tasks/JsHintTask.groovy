@@ -41,7 +41,7 @@ class JsHintTask extends SourceTask {
     def run() {
         final File jshintJsFile = RESOURCE_UTIL.extractFileToDirectory(
                 new File(project.buildDir, TMP_DIR), JSHINT_PATH)
-        final List<String> args = [jshintJsFile.canonicalPath]
+        final List<String> args = ["-opt", "9", jshintJsFile.canonicalPath]
         args.addAll(source.files.collect { it.canonicalPath })
         if (checkstyle) {
           logger.debug("reporter=checkstyle")
